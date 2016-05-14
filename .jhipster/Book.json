@@ -1,0 +1,29 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "matchId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "score1Prediction",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "score2Prediction",
+            "fieldType": "Integer"
+        }
+    ],
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "book",
+    "pagination": "no"
+}

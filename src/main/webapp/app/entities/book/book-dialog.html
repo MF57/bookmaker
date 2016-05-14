@@ -1,0 +1,60 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myBookLabel">Create or edit a Book</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.book.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_userId">UserId</label>
+            <input type="text" class="form-control" name="userId" id="field_userId"
+                    ng-model="vm.book.userId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_matchId">MatchId</label>
+            <input type="text" class="form-control" name="matchId" id="field_matchId"
+                    ng-model="vm.book.matchId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_score1Prediction">Score1Prediction</label>
+            <input type="number" class="form-control" name="score1Prediction" id="field_score1Prediction"
+                    ng-model="vm.book.score1Prediction"
+                    min="0" />
+            <div ng-show="editForm.score1Prediction.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.score1Prediction.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.score1Prediction.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_score2Prediction">Score2Prediction</label>
+            <input type="number" class="form-control" name="score2Prediction" id="field_score2Prediction"
+                    ng-model="vm.book.score2Prediction"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
