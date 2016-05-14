@@ -1,0 +1,109 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myMatchLabel">Create or edit a Match</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.match.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_date">Date</label>
+                <div class="input-group">
+                    <input id="field_date" type="text" class="form-control" name="date" uib-datepicker-popup="{{dateformat}}" ng-model="vm.match.date" is-open="vm.datePickerOpenStatus.date"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_status">Status</label>
+            <select class="form-control" name="status" ng-model="vm.match.status" id="field_status">
+                <option value="IN_FUTURE" translate="bookmakerApp.MatchStatus.IN_FUTURE">IN_FUTURE</option>
+                <option value="CANCELLED">CANCELLED</option>
+                <option value="IN_PROGRESS" translate="bookmakerApp.MatchStatus.IN_PROGRESS">IN_PROGRESS</option>
+                <option value="FINISHED">FINISHED</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_currentMinute">CurrentMinute</label>
+            <input type="number" class="form-control" name="currentMinute" id="field_currentMinute"
+                    ng-model="vm.match.currentMinute"
+                    min="0" max="200" />
+            <div ng-show="editForm.currentMinute.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.currentMinute.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.currentMinute.$error.max">
+                    This field cannot be more than 200.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.currentMinute.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_team1">Team1</label>
+            <input type="text" class="form-control" name="team1" id="field_team1"
+                    ng-model="vm.match.team1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_team2">Team2</label>
+            <input type="text" class="form-control" name="team2" id="field_team2"
+                    ng-model="vm.match.team2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_team1Score">Team1Score</label>
+            <input type="number" class="form-control" name="team1Score" id="field_team1Score"
+                    ng-model="vm.match.team1Score"
+                    min="0" />
+            <div ng-show="editForm.team1Score.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.team1Score.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.team1Score.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_team2Score">Team2Score</label>
+            <input type="number" class="form-control" name="team2Score" id="field_team2Score"
+                    ng-model="vm.match.team2Score"
+                    min="0" />
+            <div ng-show="editForm.team2Score.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.team2Score.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.team2Score.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,52 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "MatchStatus",
+            "fieldValues": "IN_FUTURE, CANCELLED, IN_PROGRESS, FINISHED"
+        },
+        {
+            "fieldName": "currentMinute",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": "0",
+            "fieldValidateRulesMax": "200"
+        },
+        {
+            "fieldName": "team1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "team2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "team1Score",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "team2Score",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        }
+    ],
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "match",
+    "pagination": "no"
+}

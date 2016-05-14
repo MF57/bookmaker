@@ -1,0 +1,68 @@
+<div>
+    <h2>Matches</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="match.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Match
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Date</span></th>
+                    <th><span>Status</span></th>
+                    <th><span>CurrentMinute</span></th>
+                    <th><span>Team1</span></th>
+                    <th><span>Team2</span></th>
+                    <th><span>Team1Score</span></th>
+                    <th><span>Team2Score</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="match in vm.matches track by match.id">
+                    <td><a ui-sref="match-detail({id:match.id})">{{match.id}}</a></td>
+                        <td>{{match.date | date:'mediumDate'}}</td>
+                    <td translate="{{'bookmakerApp.MatchStatus.' + match.status}}">{{match.status}}</td>
+                    <td>{{match.currentMinute}}</td>
+                    <td>{{match.team1}}</td>
+                    <td>{{match.team2}}</td>
+                    <td>{{match.team1Score}}</td>
+                    <td>{{match.team2Score}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="match-detail({id:match.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="match.edit({id:match.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="match.delete({id:match.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

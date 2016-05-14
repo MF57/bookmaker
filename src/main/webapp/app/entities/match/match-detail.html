@@ -1,0 +1,48 @@
+
+<div>
+    <h2><span>Match</span> {{vm.match.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span>Date</dt></dt>
+        <dd>
+            <span>{{vm.match.date | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span>Status</dt></dt>
+        <dd>
+            <span translate="{{'bookmakerApp.MatchStatus.' + vm.match.status}}">{{vm.match.status}}</span>
+        </dd>
+        <hr>
+        <dt><span>CurrentMinute</dt></dt>
+        <dd>
+            <span>{{vm.match.currentMinute}}<span>
+        </dd>
+        <hr>
+        <dt><span>Team1</dt></dt>
+        <dd>
+            <span>{{vm.match.team1}}<span>
+        </dd>
+        <hr>
+        <dt><span>Team2</dt></dt>
+        <dd>
+            <span>{{vm.match.team2}}<span>
+        </dd>
+        <hr>
+        <dt><span>Team1Score</dt></dt>
+        <dd>
+            <span>{{vm.match.team1Score}}<span>
+        </dd>
+        <hr>
+        <dt><span>Team2Score</dt></dt>
+        <dd>
+            <span>{{vm.match.team2Score}}<span>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
