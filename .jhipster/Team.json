@@ -1,0 +1,34 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numberOfWonMatches",
+            "fieldType": "Integer",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "numberOfLostMatches",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": "0"
+        },
+        {
+            "fieldName": "numberOfDraws",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": "0"
+        }
+    ],
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "team",
+    "pagination": "no"
+}
