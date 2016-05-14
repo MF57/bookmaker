@@ -1,0 +1,16 @@
+version: '2'
+services:
+    bookmaker-app:
+        image: bookmaker
+        external_links:
+            - bookmaker-mongodb:mongodb
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod
+            - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017
+            - SPRING_DATA_MONGODB_DATABASE=bookmaker
+        ports:
+            - 8080:8080
+    bookmaker-mongodb:
+        extends:
+            file: mongodb.yml
+            service: bookmaker-mongodb

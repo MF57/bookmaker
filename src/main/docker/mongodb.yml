@@ -1,0 +1,9 @@
+version: '2'
+services:
+    bookmaker-mongodb:
+        container_name: bookmaker-mongodb
+        image: mongo:3.2.3
+        # volumes:
+        #     - ~/volumes/jhipster/bookmaker/mongodb/:/data/db/
+        ports:
+            - 27017:27017
