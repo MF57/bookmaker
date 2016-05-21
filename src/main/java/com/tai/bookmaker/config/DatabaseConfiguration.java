@@ -1,5 +1,6 @@
 package com.tai.bookmaker.config;
 
+import com.github.mongobee.Mongobee;
 import com.tai.bookmaker.domain.util.JSR310DateConverters.*;
 import com.mongodb.Mongo;
 import org.mongeez.Mongeez;
@@ -72,13 +73,15 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration {
     }
 
     @Bean
-    public Mongeez mongeez() {
-        log.debug("Configuring Mongeez");
-        Mongeez mongeez = new Mongeez();
-        mongeez.setFile(new ClassPathResource("/config/mongeez/master.xml"));
-        mongeez.setMongo(mongo);
-        mongeez.setDbName(mongoProperties.getDatabase());
-        mongeez.process();
-        return mongeez;
+    public Mongobee mongobee() {
+
+        log.debug("Configuring Mongobee");
+
+        Mongobee mongobee = new Mongobee(mongo);
+        mongobee.setDbName(mongoProperties.getDatabase());
+        mongobee.setChangeLogsScanPackage(
+            "de.shaere.sharecore.config.dbmigrations"); // package to scan for changesets
+        mongobee.setEnabled(true);
+        return mongobee;
     }
 }

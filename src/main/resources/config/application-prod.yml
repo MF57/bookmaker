@@ -19,13 +19,19 @@ spring:
             enabled: false
     data:
         mongodb:
-            uri: mongodb://localhost:27017
-            database: bookmaker
+            uri: mongodb://heroku_g93npvlt:p1e7jj3ojdnd85e388tn561lu8@ds011412.mlab.com:11412/heroku_g93npvlt?authMode=scram-sha1
+            database: heroku_g93npvlt
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+         host: smtp.gmail.com
+                port: 587
+                username: microinkwizytor@gmail.com  #Replace this field with your Gmail username.
+                password: ************           #Replace this field with your Gmail password.
+                protocol: smtp
+                tls: true
+                properties.mail.smtp:
+                    auth: true
+                    starttls.enable: true
+                    ssl.trust: smtp.gmail.com
     thymeleaf:
         cache: true
 

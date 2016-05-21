@@ -234,6 +234,11 @@
             <version>0.9.6</version>
         </dependency>
         <dependency>
+            <groupId>com.github.mongobee</groupId>
+            <artifactId>mongobee</artifactId>
+            <version>0.11</version>
+        </dependency>
+        <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-jdk8</artifactId>
             <version>${mapstruct.version}</version>

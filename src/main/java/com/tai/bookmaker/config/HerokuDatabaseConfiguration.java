@@ -17,20 +17,23 @@ public class HerokuDatabaseConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(HerokuDatabaseConfiguration.class);
 
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.hikari")
-    public DataSource dataSource(DataSourceProperties dataSourceProperties) {
-        log.debug("Configuring Heroku Datasource");
+//    @Bean
+//    @ConfigurationProperties(prefix = "spring.datasource.hikari")
+//    public DataSource dataSource(DataSourceProperties dataSourceProperties) {
+//        log.debug("Configuring Heroku Datasource");
+//
+//        String herokuUrl = System.getenv("JDBC_DATABASE_URL");
+//        log.error(herokuUrl);
+//        if (herokuUrl != null) {
+//            return DataSourceBuilder
+//                .create(dataSourceProperties.getClassLoader())
+//                .type(HikariDataSource.class)
+//                .url(herokuUrl)
+//                .build();
+//        } else {
+//            throw new ApplicationContextException("Heroku database URL is not configured, you must set $JDBC_DATABASE_URL");
+//        }
+//    }
 
-        String herokuUrl = System.getenv("JDBC_DATABASE_URL");
-        if (herokuUrl != null) {
-            return DataSourceBuilder
-                .create(dataSourceProperties.getClassLoader())
-                .type(HikariDataSource.class)
-                .url(herokuUrl)
-                .build();
-        } else {
-            throw new ApplicationContextException("Heroku database URL is not configured, you must set $JDBC_DATABASE_URL");
-        }
-    }
+
 }
