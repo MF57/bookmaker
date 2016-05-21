@@ -23,15 +23,15 @@ spring:
             database: heroku_g93npvlt
     mail:
          host: smtp.gmail.com
-                port: 587
-                username: microinkwizytor@gmail.com  #Replace this field with your Gmail username.
-                password: ************           #Replace this field with your Gmail password.
-                protocol: smtp
-                tls: true
-                properties.mail.smtp:
-                    auth: true
-                    starttls.enable: true
-                    ssl.trust: smtp.gmail.com
+         port: 587
+         username: bookmakertai@gmail.com
+         password: bookmakertai123        #credentials in repo? oh well
+         protocol: smtp
+         tls: true
+         properties.mail.smtp:
+              auth: true
+              starttls.enable: true
+              ssl.trust: smtp.gmail.com
     thymeleaf:
         cache: true
 
