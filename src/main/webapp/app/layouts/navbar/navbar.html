@@ -17,8 +17,20 @@
                         <span class="hidden-sm">Home</span>
                     </a>
                 </li>
+                <li ng-class="{active: vm.$state.includes('make_books')}" ng-switch-when="true">
+                    <a ui-sref="make_books" ng-click="vm.navCollapsed = true">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="hidden-sm">Make Books</span>
+                    </a>
+                </li>
+                <li ng-class="{active: vm.$state.includes('my_books')}" ng-switch-when="true">
+                    <a ui-sref="my_books" ng-click="vm.navCollapsed = true">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <span class="hidden-sm">My Books</span>
+                    </a>
+                </li>
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
+                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
                             <span class="glyphicon glyphicon-th-list"></span>
