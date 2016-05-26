@@ -8,19 +8,20 @@
         .module('bookmakerApp')
         .controller('BookMakingController', BookMakingController);
 
-    BookMakingController.$inject = ['$scope', '$state', 'Book'];
+    BookMakingController.$inject = ['$scope', '$state', 'BookMaking'];
 
-    function BookMakingController ($scope, $state, Book) {
+    function BookMakingController ($scope, $state, BookMaking) {
         var vm = this;
         vm.message = "Here you can make new books";
-        // vm.books = [];
-        // vm.loadAll = function() {
-        //     Book.query(function(result) {
-        //         vm.books = result;
-        //     });
-        // };
-        //
-        // vm.loadAll();
+        vm.matches = [];
+        vm.loadAll = function() {
+            BookMaking.query(function(result) {
+                vm.matches = result;
+                console.log(vm.matches);
+            });
+        };
+
+        vm.loadAll();
 
     }
 })();

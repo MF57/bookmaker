@@ -27,10 +27,10 @@ import java.util.Optional;
 public class MatchResource {
 
     private final Logger log = LoggerFactory.getLogger(MatchResource.class);
-        
+
     @Inject
     private MatchService matchService;
-    
+
     /**
      * POST  /matches : Create a new match.
      *
@@ -89,6 +89,20 @@ public class MatchResource {
     public List<Match> getAllMatches() {
         log.debug("REST request to get all Matches");
         return matchService.findAll();
+    }
+
+    /**
+     * GET  /matches : get all the matches.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of matches in body
+     */
+    @RequestMapping(value = "/matches/in_future",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Match> getFutureMatches() {
+        log.debug("REST request to get all Matches");
+        return matchService.findFutureMatches();
     }
 
     /**

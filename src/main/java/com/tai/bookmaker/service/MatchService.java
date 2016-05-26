@@ -16,13 +16,13 @@ import java.util.List;
 public class MatchService {
 
     private final Logger log = LoggerFactory.getLogger(MatchService.class);
-    
+
     @Inject
     private MatchRepository matchRepository;
-    
+
     /**
      * Save a match.
-     * 
+     *
      * @param match the entity to save
      * @return the persisted entity
      */
@@ -34,12 +34,18 @@ public class MatchService {
 
     /**
      *  Get all the matches.
-     *  
+     *
      *  @return the list of entities
      */
     public List<Match> findAll() {
         log.debug("Request to get all Matches");
         List<Match> result = matchRepository.findAll();
+        return result;
+    }
+
+    public List<Match> findFutureMatches() {
+        log.debug("Request to get all Matches");
+        List<Match> result = matchRepository.findByStatus("IN_FUTURE");
         return result;
     }
 
@@ -57,7 +63,7 @@ public class MatchService {
 
     /**
      *  Delete the  match by id.
-     *  
+     *
      *  @param id the id of the entity
      */
     public void delete(String id) {
