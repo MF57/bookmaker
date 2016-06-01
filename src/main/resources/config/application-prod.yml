@@ -22,16 +22,16 @@ spring:
             uri: mongodb://heroku_g93npvlt:p1e7jj3ojdnd85e388tn561lu8@ds011412.mlab.com:11412/heroku_g93npvlt?authMode=scram-sha1
             database: heroku_g93npvlt
     mail:
-         host: smtp.gmail.com
+         host: smtp.mailgun.org
          port: 587
-         username: bookmakertai@gmail.com
-         password: bookmakertai123        #credentials in repo? oh well
+         username: postmaster@appf75b1129f6ab4a26affe5aafa544a1dc.mailgun.org
+         password: 3627e67e483d958565d1555120a94934        #credentials in repo? oh well
          protocol: smtp
          tls: true
          properties.mail.smtp:
               auth: true
               starttls.enable: true
-              ssl.trust: smtp.gmail.com
+              ssl.trust: smtp.mailgun.org
     thymeleaf:
         cache: true
 
