@@ -16,4 +16,6 @@ public interface BookRepository extends MongoRepository<Book,String> {
     @Query(value = "{  'userId' : ?0, 'matchId' : ?1 }")
     List<Book> getUsersBookForMatch(String userId, String matchId);
 
+    List<Book> findByUserId(String userId);
+
 }

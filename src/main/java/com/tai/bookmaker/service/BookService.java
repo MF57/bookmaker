@@ -16,13 +16,13 @@ import java.util.List;
 public class BookService {
 
     private final Logger log = LoggerFactory.getLogger(BookService.class);
-    
+
     @Inject
     private BookRepository bookRepository;
-    
+
     /**
      * Save a book.
-     * 
+     *
      * @param book the entity to save
      * @return the persisted entity
      */
@@ -34,7 +34,7 @@ public class BookService {
 
     /**
      *  Get all the books.
-     *  
+     *
      *  @return the list of entities
      */
     public List<Book> findAll() {
@@ -57,11 +57,16 @@ public class BookService {
 
     /**
      *  Delete the  book by id.
-     *  
+     *
      *  @param id the id of the entity
      */
     public void delete(String id) {
         log.debug("Request to delete Book : {}", id);
         bookRepository.delete(id);
+    }
+
+
+    public List<Book> findUserBookInfo(String currentUserLogin) {
+        return bookRepository.findByUserId(currentUserLogin);
     }
 }

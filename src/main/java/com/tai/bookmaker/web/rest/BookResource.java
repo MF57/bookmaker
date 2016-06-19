@@ -2,6 +2,7 @@ package com.tai.bookmaker.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.tai.bookmaker.domain.Book;
+import com.tai.bookmaker.security.SecurityUtils;
 import com.tai.bookmaker.service.BookService;
 import com.tai.bookmaker.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -27,10 +28,10 @@ import java.util.Optional;
 public class BookResource {
 
     private final Logger log = LoggerFactory.getLogger(BookResource.class);
-        
+
     @Inject
     private BookService bookService;
-    
+
     /**
      * POST  /books : Create a new book.
      *
@@ -89,6 +90,18 @@ public class BookResource {
     public List<Book> getAllBooks() {
         log.debug("REST request to get all Books");
         return bookService.findAll();
+    }
+
+
+
+
+    @RequestMapping(value = "/books/user",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Book> getAllBooksForUser() {
+        log.debug("REST request to get all Books for user");
+        return bookService.findUserBookInfo(SecurityUtils.getCurrentUserLogin());
     }
 
     /**
