@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.tai.bookmaker.domain.Book;
 import com.tai.bookmaker.security.SecurityUtils;
 import com.tai.bookmaker.service.BookService;
+import com.tai.bookmaker.web.rest.dto.UserBookInfoDTO;
 import com.tai.bookmaker.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,7 +100,7 @@ public class BookResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Book> getAllBooksForUser() {
+    public UserBookInfoDTO getAllBooksForUser() {
         log.debug("REST request to get all Books for user");
         return bookService.findUserBookInfo(SecurityUtils.getCurrentUserLogin());
     }
