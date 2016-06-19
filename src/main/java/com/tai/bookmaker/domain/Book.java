@@ -8,6 +8,8 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.tai.bookmaker.domain.enumeration.BookStatus;
+
 /**
  * A Book.
  */
@@ -33,6 +35,9 @@ public class Book implements Serializable {
     @Min(value = 0)
     @Field("score_2_prediction")
     private Integer score2Prediction;
+
+    @Field("book_status")
+    private BookStatus bookStatus;
 
     public String getId() {
         return id;
@@ -74,6 +79,14 @@ public class Book implements Serializable {
         this.score2Prediction = score2Prediction;
     }
 
+    public BookStatus getBookStatus() {
+        return bookStatus;
+    }
+
+    public void setBookStatus(BookStatus bookStatus) {
+        this.bookStatus = bookStatus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -102,6 +115,7 @@ public class Book implements Serializable {
             ", matchId='" + matchId + "'" +
             ", score1Prediction='" + score1Prediction + "'" +
             ", score2Prediction='" + score2Prediction + "'" +
+            ", bookStatus='" + bookStatus + "'" +
             '}';
     }
 }

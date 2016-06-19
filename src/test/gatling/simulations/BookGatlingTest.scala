@@ -67,7 +67,7 @@ class BookGatlingTest extends Simulation {
             .exec(http("Create new book")
             .post("/api/books")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "userId":"SAMPLE_TEXT", "matchId":"SAMPLE_TEXT", "score1Prediction":"0", "score2Prediction":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "userId":"SAMPLE_TEXT", "matchId":"SAMPLE_TEXT", "score1Prediction":"0", "score2Prediction":"0", "bookStatus":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_book_url"))).exitHereIfFailed
             .pause(10)

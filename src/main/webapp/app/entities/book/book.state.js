@@ -66,6 +66,7 @@
                                 matchId: null,
                                 score1Prediction: null,
                                 score2Prediction: null,
+                                bookStatus: null,
                                 id: null
                             };
                         }

@@ -20,6 +20,11 @@
         {
             "fieldName": "score2Prediction",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "bookStatus",
+            "fieldType": "BookStatus",
+            "fieldValues": "WON,LOST,PENDING"
         }
     ],
     "dto": "no",

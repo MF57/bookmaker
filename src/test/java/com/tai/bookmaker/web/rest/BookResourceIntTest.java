@@ -29,6 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.tai.bookmaker.domain.enumeration.BookStatus;
 
 /**
  * Test class for the BookResource REST controller.
@@ -51,6 +52,9 @@ public class BookResourceIntTest {
 
     private static final Integer DEFAULT_SCORE_2_PREDICTION = 1;
     private static final Integer UPDATED_SCORE_2_PREDICTION = 2;
+
+    private static final BookStatus DEFAULT_BOOK_STATUS = BookStatus.WON;
+    private static final BookStatus UPDATED_BOOK_STATUS = BookStatus.LOST;
 
     @Inject
     private BookRepository bookRepository;
@@ -86,6 +90,7 @@ public class BookResourceIntTest {
         book.setMatchId(DEFAULT_MATCH_ID);
         book.setScore1Prediction(DEFAULT_SCORE_1_PREDICTION);
         book.setScore2Prediction(DEFAULT_SCORE_2_PREDICTION);
+        book.setBookStatus(DEFAULT_BOOK_STATUS);
     }
 
     @Test
@@ -107,6 +112,7 @@ public class BookResourceIntTest {
         assertThat(testBook.getMatchId()).isEqualTo(DEFAULT_MATCH_ID);
         assertThat(testBook.getScore1Prediction()).isEqualTo(DEFAULT_SCORE_1_PREDICTION);
         assertThat(testBook.getScore2Prediction()).isEqualTo(DEFAULT_SCORE_2_PREDICTION);
+        assertThat(testBook.getBookStatus()).isEqualTo(DEFAULT_BOOK_STATUS);
     }
 
     @Test
@@ -122,7 +128,8 @@ public class BookResourceIntTest {
                 .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.toString())))
                 .andExpect(jsonPath("$.[*].matchId").value(hasItem(DEFAULT_MATCH_ID.toString())))
                 .andExpect(jsonPath("$.[*].score1Prediction").value(hasItem(DEFAULT_SCORE_1_PREDICTION)))
-                .andExpect(jsonPath("$.[*].score2Prediction").value(hasItem(DEFAULT_SCORE_2_PREDICTION)));
+                .andExpect(jsonPath("$.[*].score2Prediction").value(hasItem(DEFAULT_SCORE_2_PREDICTION)))
+                .andExpect(jsonPath("$.[*].bookStatus").value(hasItem(DEFAULT_BOOK_STATUS.toString())));
     }
 
     @Test
@@ -138,7 +145,8 @@ public class BookResourceIntTest {
             .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.toString()))
             .andExpect(jsonPath("$.matchId").value(DEFAULT_MATCH_ID.toString()))
             .andExpect(jsonPath("$.score1Prediction").value(DEFAULT_SCORE_1_PREDICTION))
-            .andExpect(jsonPath("$.score2Prediction").value(DEFAULT_SCORE_2_PREDICTION));
+            .andExpect(jsonPath("$.score2Prediction").value(DEFAULT_SCORE_2_PREDICTION))
+            .andExpect(jsonPath("$.bookStatus").value(DEFAULT_BOOK_STATUS.toString()));
     }
 
     @Test
@@ -162,6 +170,7 @@ public class BookResourceIntTest {
         updatedBook.setMatchId(UPDATED_MATCH_ID);
         updatedBook.setScore1Prediction(UPDATED_SCORE_1_PREDICTION);
         updatedBook.setScore2Prediction(UPDATED_SCORE_2_PREDICTION);
+        updatedBook.setBookStatus(UPDATED_BOOK_STATUS);
 
         restBookMockMvc.perform(put("/api/books")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -176,6 +185,7 @@ public class BookResourceIntTest {
         assertThat(testBook.getMatchId()).isEqualTo(UPDATED_MATCH_ID);
         assertThat(testBook.getScore1Prediction()).isEqualTo(UPDATED_SCORE_1_PREDICTION);
         assertThat(testBook.getScore2Prediction()).isEqualTo(UPDATED_SCORE_2_PREDICTION);
+        assertThat(testBook.getBookStatus()).isEqualTo(UPDATED_BOOK_STATUS);
     }
 
     @Test

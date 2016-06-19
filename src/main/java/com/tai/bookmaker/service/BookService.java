@@ -1,6 +1,7 @@
 package com.tai.bookmaker.service;
 
 import com.tai.bookmaker.domain.Book;
+import com.tai.bookmaker.domain.enumeration.BookStatus;
 import com.tai.bookmaker.repository.BookRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,9 @@ public class BookService {
      */
     public Book save(Book book) {
         log.debug("Request to save Book : {}", book);
+        if(book.getBookStatus() == null) {
+            book.setBookStatus(BookStatus.PENDING);
+        }
         Book result = bookRepository.save(book);
         return result;
     }

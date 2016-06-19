@@ -47,6 +47,14 @@
                     ng-model="vm.book.score2Prediction"
                      />
         </div>
+        <div class="form-group">
+            <label class="control-label" for="field_bookStatus">BookStatus</label>
+            <select class="form-control" name="bookStatus" ng-model="vm.book.bookStatus" id="field_bookStatus">
+                <option value="WON">WON</option>
+                <option value="LOST">LOST</option>
+                <option value="PENDING">PENDING</option>
+            </select>
+        </div>
 
     </div>
     <div class="modal-footer">
