@@ -1,3 +1,82 @@
 <div>
     <h2>{{vm.message}}</h2>
+    <h3>Pending</h3>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th><span>Team1</span></th>
+                <th><span>Team2</span></th>
+                <th><span>Team1 Score</span></th>
+                <th><span>Team2 Score</span></th>
+                <th><span>Team1 Prediction</span></th>
+                <th><span>Team2 Prediction</span></th>
+                <th><span>Date</span></th>
+                <th><span>Status</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="book in vm.books.pendingBooks track by book.date">
+                <td>{{book.team1Name}}</td>
+                <td>{{book.team2Name}}</td>
+                <td>{{book.team1ActualScore}}</td>
+                <td>{{book.team2ActualScore}}</td>
+                <td>{{book.team1PredictionScore}}</td>
+                <td>{{book.team2PredictionScore}}</td>
+                <td>{{book.date}}</td>
+                <td>{{book.status === "IN_FUTURE" ? book.status : book.currentMinute+'\''}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h3>Won</h3>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th><span>Team 1</span></th>
+                <th><span>Team 2</span></th>
+                <th><span>Team 1 Score</span></th>
+                <th><span>Team 2 Score</span></th>
+                <th><span>Date</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="success" ng-repeat="book in vm.books.wonBooks track by book.date">
+                <td>{{book.team1Name}}</td>
+                <td>{{book.team2Name}}</td>
+                <td>{{book.team1ActualScore}}</td>
+                <td>{{book.team2ActualScore}}</td>
+                <td>{{book.date}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h3>Lost</h3>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th><span>Team 1</span></th>
+                <th><span>Team 2</span></th>
+                <th><span>Team 1 Score</span></th>
+                <th><span>Team 2 Score</span></th>
+                <th><span>Team 2 Prediction</span></th>
+                <th><span>Team 2 Prediction</span></th>
+                <th><span>Date</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="danger" ng-repeat="book in vm.books.lostBooks track by book.date">
+                <td>{{book.team1Name}}</td>
+                <td>{{book.team2Name}}</td>
+                <td>{{book.team1ActualScore}}</td>
+                <td>{{book.team2ActualScore}}</td>
+                <td>{{book.team1PredictionScore}}</td>
+                <td>{{book.team2PredictionScore}}</td>
+                <td>{{book.date}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
