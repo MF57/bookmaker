@@ -1,3 +1,51 @@
 <div>
     <h2>{{vm.message}}</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ng-click="vm.bookMatches()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span>
+                        Book Selected
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th><span>Date</span></th>
+                <th><span>Team 1</span></th>
+                <th><span>Team 2</span></th>
+                <th><span>Team 1 Score Prediction</span></th>
+                <th><span>Team 2 Score Prediction</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="match in vm.matches track by match.id">
+                <td>{{match.date | date:'mediumDate'}}</td>
+                <td>{{match.team1}}</td>
+                <td>{{match.team2}}</td>
+                <td>
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="team1Score" id="field_team1Score"
+                               ng-model="match.team1ScorePrediction"
+                               min="0"/>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="team2Score" id="field_team2Score"
+                               ng-model="match.team2ScorePrediction"
+                               min="0"/>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

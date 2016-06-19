@@ -2,7 +2,9 @@ package com.tai.bookmaker.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.tai.bookmaker.domain.Match;
+import com.tai.bookmaker.security.SecurityUtils;
 import com.tai.bookmaker.service.MatchService;
+import com.tai.bookmaker.web.rest.dto.MatchDTO;
 import com.tai.bookmaker.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,18 +93,14 @@ public class MatchResource {
         return matchService.findAll();
     }
 
-    /**
-     * GET  /matches : get all the matches.
-     *
-     * @return the ResponseEntity with status 200 (OK) and the list of matches in body
-     */
+
     @RequestMapping(value = "/matches/in_future",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Match> getFutureMatches() {
+    public List<MatchDTO> getFutureMatchesForCurrentUser() {
         log.debug("REST request to get all Matches");
-        return matchService.findFutureMatches();
+        return matchService.findFutureMatchesForCurrentUser(SecurityUtils.getCurrentUserLogin());
     }
 
     /**

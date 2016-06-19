@@ -1,13 +1,20 @@
 package com.tai.bookmaker.service;
 
+import com.tai.bookmaker.domain.Book;
 import com.tai.bookmaker.domain.Match;
+import com.tai.bookmaker.domain.Team;
+import com.tai.bookmaker.repository.BookRepository;
 import com.tai.bookmaker.repository.MatchRepository;
+import com.tai.bookmaker.repository.TeamRepository;
+import com.tai.bookmaker.web.rest.dto.MatchDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Match.
@@ -19,6 +26,12 @@ public class MatchService {
 
     @Inject
     private MatchRepository matchRepository;
+
+    @Inject
+    private BookRepository bookRepository;
+
+    @Inject
+    private TeamRepository teamRepository;
 
     /**
      * Save a match.
@@ -43,10 +56,21 @@ public class MatchService {
         return result;
     }
 
-    public List<Match> findFutureMatches() {
+    public List<MatchDTO> findFutureMatchesForCurrentUser(String currentUserLogin) {
         log.debug("Request to get all Matches");
-        List<Match> result = matchRepository.findByStatus("IN_FUTURE");
+        List<Match> futureMatches = matchRepository.findByStatus("IN_FUTURE");
+        List<MatchDTO> result = new ArrayList<>();
+        for (Match match : futureMatches) {
+            List<Book> usersBookForMatch = bookRepository.getUsersBookForMatch(currentUserLogin, match.getId());
+            if (usersBookForMatch.size() == 0) {
+                Team team1 = teamRepository.findOne(match.getTeam1());
+                Team team2 = teamRepository.findOne(match.getTeam2());
+                result.add(new MatchDTO(match.getId(), match.getDate(), match.getStatus(),
+                    match.getCurrentMinute(), team1.getName(), team2.getName(), match.getTeam1Score(), match.getTeam2Score()));
+            }
+        }
         return result;
+
     }
 
     /**
