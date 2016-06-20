@@ -35,6 +35,7 @@ public class Team implements Serializable {
     @Field("number_of_draws")
     private Integer numberOfDraws;
 
+
     public String getId() {
         return id;
     }
