@@ -35,6 +35,18 @@ public class Team implements Serializable {
     @Field("number_of_draws")
     private Integer numberOfDraws;
 
+    public void incrementNumberOfWonMatches() {
+        numberOfWonMatches++;
+    }
+
+    public void incrementNumberOfLostMatches() {
+        numberOfLostMatches++;
+    }
+
+    public void incrementNumberOfDraws() {
+        numberOfDraws++;
+    }
+
 
     public String getId() {
         return id;

@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="book in vm.books.pendingBooks track by book.date">
+            <tr ng-repeat="book in vm.books.pendingBooks">
                 <td>{{book.team1Name}}</td>
                 <td>{{book.team2Name}}</td>
                 <td>{{book.team1ActualScore}}</td>
@@ -42,7 +42,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="success" ng-repeat="book in vm.books.wonBooks track by book.date">
+            <tr class="success" ng-repeat="book in vm.books.wonBooks">
                 <td>{{book.team1Name}}</td>
                 <td>{{book.team2Name}}</td>
                 <td>{{book.team1ActualScore}}</td>
@@ -67,7 +67,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="danger" ng-repeat="book in vm.books.lostBooks track by book.date">
+            <tr class="danger" ng-repeat="book in vm.books.lostBooks">
                 <td>{{book.team1Name}}</td>
                 <td>{{book.team2Name}}</td>
                 <td>{{book.team1ActualScore}}</td>

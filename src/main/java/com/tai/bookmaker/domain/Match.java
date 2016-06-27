@@ -145,4 +145,17 @@ public class Match implements Serializable {
             ", team2Score='" + team2Score + "'" +
             '}';
     }
+
+    public String getWinner() {
+        if(!status.equals(MatchStatus.FINISHED)) {
+            throw new IllegalStateException();
+        }
+        if (team1Score > team2Score) {
+            return team1;
+        } else if (team2Score > team1Score) {
+            return team2;
+        } else {
+            return "draw";
+        }
+    }
 }

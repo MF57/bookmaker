@@ -18,4 +18,6 @@ public interface BookRepository extends MongoRepository<Book,String> {
 
     List<Book> findByUserId(String userId);
 
+    List<Book> findByMatchId(String matchId);
+
 }

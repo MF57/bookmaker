@@ -1,7 +1,9 @@
 package com.tai.bookmaker.config;
 
+import com.tai.bookmaker.domain.Book;
 import com.tai.bookmaker.domain.Match;
 import com.tai.bookmaker.domain.Team;
+import com.tai.bookmaker.domain.enumeration.BookStatus;
 import com.tai.bookmaker.domain.enumeration.MatchStatus;
 import com.tai.bookmaker.repository.BookRepository;
 import com.tai.bookmaker.repository.MatchRepository;
@@ -12,6 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -37,6 +40,18 @@ public class ScraperConfiguration {
 
     @Autowired
     private MatchRepository matchRepository;
+
+    @Bean
+    public Boolean clearOutdatedMatches() {
+        List<Match> outdatedMatches = matchRepository.getOutDatedMatches(LocalDate.now());
+        for (Match match : outdatedMatches) {
+            match.setStatus(MatchStatus.CANCELLED);
+            matchRepository.save(match);
+        }
+        return true;
+    }
+
+
 
 
     @Scheduled(initialDelay = 10, fixedDelay = 60000)
@@ -87,16 +102,21 @@ public class ScraperConfiguration {
             return;
         }
 
+        if(updateBooks) {
+            updateTeams(team1, team2, match.getWinner());
+            updateBooks(match);
+        }
         matchRepository.save(match);
-
-
 
 
     }
 
+
     private int deduceCurrentMinute(MatchStatus status, String matchInfo) {
         if(status.equals(MatchStatus.IN_FUTURE) || status.equals(MatchStatus.CANCELLED)) {
             return 0;
+        } else if(matchInfo.contains("HT")) {
+            return 45;
         } else if (status.equals(MatchStatus.FINISHED)) {
             return 90;
         } else {
@@ -117,6 +137,38 @@ public class ScraperConfiguration {
             return MatchStatus.IN_FUTURE;
         } else {
             return MatchStatus.CANCELLED;
+        }
+    }
+
+    private void updateTeams(Team team1, Team team2, String winner) {
+        if(winner.equals("draw")) {
+            team1.incrementNumberOfDraws();
+            team2.incrementNumberOfDraws();
+        } else if (winner.equals(team1.getId())) {
+            team1.incrementNumberOfWonMatches();
+            team2.incrementNumberOfLostMatches();
+        } else if (winner.equals(team2.getId())) {
+            team1.incrementNumberOfLostMatches();
+            team2.incrementNumberOfWonMatches();
+        } else {
+            throw new IllegalStateException();
+        }
+        teamRepository.save(team1);
+        teamRepository.save(team2);
+
+    }
+
+
+    private void updateBooks(Match match) {
+        List<Book> books = bookRepository.findByMatchId(match.getId());
+        for (Book book : books) {
+            if(book.getScore1Prediction().equals(match.getTeam1Score()) &&
+                book.getScore2Prediction().equals(match.getTeam2Score())) {
+                book.setBookStatus(BookStatus.WON);
+            } else {
+                book.setBookStatus(BookStatus.LOST);
+            }
+            bookRepository.save(book);
         }
     }
 

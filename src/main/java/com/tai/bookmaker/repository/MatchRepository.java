@@ -4,6 +4,7 @@ import com.tai.bookmaker.domain.Match;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -15,5 +16,8 @@ public interface MatchRepository extends MongoRepository<Match, String> {
 
     @Query(value = "{  'team_1' : ?0, 'team_2' : ?1 }")
     List<Match> getMatchesByTeamsNames(String team1, String team2);
+
+    @Query(value = "{  'date' : {'$lt':  ?0}, 'status' : 'IN_FUTURE' }")
+    List<Match> getOutDatedMatches(LocalDate date);
 
 }
