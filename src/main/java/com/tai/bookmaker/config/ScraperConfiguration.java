@@ -46,6 +46,11 @@ public class ScraperConfiguration {
         List<Match> outdatedMatches = matchRepository.getOutDatedMatches(LocalDate.now());
         for (Match match : outdatedMatches) {
             match.setStatus(MatchStatus.CANCELLED);
+            List<Book> books = bookRepository.findByMatchId(match.getId());
+            for (Book book : books) {
+                book.setBookStatus(BookStatus.LOST);
+                bookRepository.save(book);
+            }
             matchRepository.save(match);
         }
         return true;
@@ -57,7 +62,11 @@ public class ScraperConfiguration {
     @Scheduled(initialDelay = 10, fixedDelay = 60000)
     public void fillDatabase() throws IOException {
         LocalDate date = LocalDate.now();
-        scrapMatches(date);
+        for (int i = 0 ; i < 5; i++) {
+            scrapMatches(date);
+            date = date.plusDays(1);
+        }
+
     }
 
     private void scrapMatches(LocalDate date) throws IOException {
